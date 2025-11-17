@@ -118,6 +118,90 @@ footer {
     margin-top: 2rem;
 }
 
+/* Rules Page Styles */
+.rules-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.rules-section {
+    background: white;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #667eea;
+}
+
+.rules-heading {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+.rules-content h3 {
+    color: #34495e;
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.rules-content h3:first-child {
+    margin-top: 0;
+}
+
+.rules-content p {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+}
+
+.rules-content ul {
+    list-style-position: outside;
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.rules-content li {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 0.75rem;
+    font-size: 1.05rem;
+}
+
+.rules-content ol {
+    list-style-position: outside;
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.rules-content ol li {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 0.75rem;
+    font-size: 1.05rem;
+}
+
+/* Emphasis and important text in rules */
+.rules-content strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.rules-content em {
+    font-style: italic;
+    color: #34495e;
+}
+
+/* Rules section IDs for anchor links */
+.rules-section[id] {
+    scroll-margin-top: 5rem;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-container {
@@ -136,6 +220,23 @@ footer {
     }
     
     .hero p {
+        font-size: 1rem;
+    }
+    
+    .rules-section {
+        padding: 1.5rem;
+    }
+    
+    .rules-heading {
+        font-size: 1.5rem;
+    }
+    
+    .rules-content h3 {
+        font-size: 1.2rem;
+    }
+    
+    .rules-content p,
+    .rules-content li {
         font-size: 1rem;
     }
 }
