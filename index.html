@@ -1,43 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Velvet Reveries</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glyph RP</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="flickity.css" />
+  </head>
+  <body>
     <!-- Navigation bar will be loaded here -->
     <div id="navbar-container"></div>
-    
+
     <!-- Main content -->
     <main>
-        <section class="hero">
-            <h1>Welcome to Velvet Reveries</h1>
-            <p>A beautiful static website template</p>
-        </section>
-        
-        <section class="content">
-            <h2>About</h2>
-            <p>This is a basic static website template with a reusable navigation bar. The navbar is loaded dynamically across all pages using JavaScript.</p>
-        </section>
-        
-        <section class="content">
-            <h2>Features</h2>
-            <ul>
-                <li>Responsive design</li>
-                <li>Reusable navigation component</li>
-                <li>Clean and modern styling</li>
-                <li>Easy to customize</li>
-            </ul>
-        </section>
+      <section class="hero">
+        <h1>Glyph RP</h1>
+        <p>A catchy phrase Bear needs to write</p>
+      </section>
+
+      <div class="main-carousel" data-flickity='{ "autoPlay": true, "wrapAround": true }'>
+        <div class="carousel-cell">...</div>
+        <div class="carousel-cell">...</div>
+        <div class="carousel-cell">...</div>
+      </div>
+
+      <section class="content">
+        <h2>What is Glyph RP all about?</h2>
+        <p>
+          Glyph RP aims to create the most immersive and unique fantasy
+          role-play servers that focuses on engaging content, character freedom
+          and individuality. From the very first time you load into our games,
+          you&rsquo;ll experience a unique starting experience different from
+          all others. From there you will begin engaging in our content and
+          developing your character. We even employ a patch-based content system
+          to keep the game fresh during each season!
+        </p>
+      </section>
     </main>
-    
+
     <footer>
-        <p>&copy; 2025 Velvet Reveries. All rights reserved.</p>
+      <p>&copy; 2025 Glyph RP. All rights reserved</p>
     </footer>
-    
+
     <!-- Load the navigation bar -->
-    <script src="nav-load.js"></script>
-</body>
+    <script src="scripts/nav-load.js"></script>
+    <script src="scripts/flickity.pkgd.js"></script>
+  </body>
 </html>
