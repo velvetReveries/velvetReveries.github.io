@@ -3,15 +3,27 @@
         <div class="nav-brand">
             <a href="index.html">Glyph RP</a>
         </div>
-        <ul class="nav-menu">
+        <button id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <ul class="nav-menu" id="nav-menu">
             <li class="nav-item">
                 <a href="index.html" class="nav-link">Server Info</a>
             </li>
             <li class="nav-item">
                 <a href="rules.html" class="nav-link">Rules</a>
             </li>
-            <li class="nav-item">
-                <a href="#about" class="nav-link">Content</a>
+            <li class="nav-item has-submenu">
+                <button class="submenu-toggle nav-link" aria-expanded="false" aria-controls="submenu-content">Content <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                <ul class="submenu" id="submenu-content">
+                    <li class="nav-item"><a href="lore.html" class="nav-link">Lore</a></li>
+                    <li class="nav-item"><a href="races.html" class="nav-link">Races</a></li>
+                    <li class="nav-item"><a href="classes.html" class="nav-link">Classes</a></li>
+                    <li class="nav-item"><a href="jobs.html" class="nav-link">Jobs</a></li>
+                    <li class="nav-item"><a href="guilds.html" class="nav-link">Guilds</a></li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a href="#services" class="nav-link">Guides</a>
@@ -21,4 +33,5 @@
             </li>
         </ul>
     </div>
+    <script src="navbar.js"></script>
 </nav>
