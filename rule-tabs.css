@@ -58,6 +58,9 @@
     margin-bottom: 1rem;
   }
   .tab {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-radius: 0;
     text-align: left;
     width: 100%;
@@ -69,6 +72,9 @@
     height: 2.2em;
     max-height: 2.2em;
     box-sizing: border-box;
+  }
+  .tab i {
+    margin-left: auto;
   }
   .tab:first-child {
     border-radius: 6px 6px 0 0;

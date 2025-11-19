@@ -16,11 +16,20 @@
   box-sizing: border-box;
 }
 
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.5;
   background-image: url(images/chalkboard.jpg);
   padding-top: 2.1rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Navigation Bar Styles */
@@ -159,10 +168,13 @@ body {
 }
 
 /* Main Content Styles */
+
 main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  flex: 1 0 auto;
+  width: 100%;
 }
 
 .hero {
@@ -203,21 +215,11 @@ main {
   font-size: 1.5rem;
 }
 
-.content p {
-  margin-bottom: 1rem;
-  line-height: 1.8;
-}
-
 .content ul {
   list-style-position: inside;
   padding-left: 1rem;
 }
 
-.content li {
-  margin-bottom: 0.5rem;
-}
-
-/* Footer Styles */
 footer {
   background: #00000049;
   color: #ecf0f1;
@@ -225,6 +227,7 @@ footer {
   font-size: 0.6rem;
   padding: 2rem;
   margin-top: 2rem;
+  flex-shrink: 0;
 }
 
 /* Only when the site isn't using mobile (max-width:800px) rules. */
@@ -250,6 +253,7 @@ footer {
 }
 
 /* Responsive Design */
+
 @media (max-width: 800px) {
   body {
     font-size: 14px;
