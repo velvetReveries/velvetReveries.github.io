@@ -5,7 +5,8 @@
 
 :root {
   --color-navbar: #0000008d;
-  --color-navbarSecondary: #181818;
+  --color-navbar-secondary: #181818;
+  --color-navbar-tertiary: #121212;
 }
 
 /* Reset and base styles */
@@ -33,10 +34,8 @@ body {
   z-index: 1000;
 }
 
-/* Solid navbar when mobile menu is open */
-.navbar.menu-open {
-  background-color: var(--color-navbarSecondary);
-  transition: background-color 220ms ease;
+.nav-hidden {
+  display: none;
 }
 
 .nav-container {
@@ -61,68 +60,71 @@ body {
   gap: 2rem;
 }
 
+.submenu-toggle {
+  font: inherit;
+  font-weight: 600;
+  font-size: 1rem;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  outline: none;
+}
+
 .nav-link {
   color: #ecf0f1;
   text-decoration: none;
   transition: color 0.3s ease;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .nav-link:hover {
   color: #3498db;
 }
 
-/* Submenu (desktop and mobile behavior) */
+/* Submenu (desktop behavior) */
 .has-submenu {
   position: relative;
 }
-.submenu {
-  display: none;
-    /* Mobile: make submenu a vertical indented list when opened */
-    .has-submenu .submenu {
-      position: static;
-      display: none;
-      padding-left: 1.25rem;
-      box-shadow: none;
-      background: transparent;
-    }
-    .has-submenu.open > .submenu {
-      display: block;
-    }
-    .has-submenu > a {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .has-submenu .fa-caret-down {
-      transition: transform 180ms ease;
-    }
-    .has-submenu.open .fa-caret-down {
-      transform: rotate(180deg);
-    }
+.has-submenu > .submenu {
+  /* Desktop: hidden but animatable (use visibility/opacity/transform)
+     We animate opacity + transform and gently increase the shadow on open. */
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-6px) scale(0.995);
+  transform-origin: top center;
+  will-change: opacity, transform, box-shadow;
+  transition: opacity 220ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    transform 220ms cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 260ms ease,
+    visibility 1ms linear 220ms;
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: var(--color-navbarSecondary);
   min-width: 200px;
   border-radius: 6px;
   padding: 0.25rem 0;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
   z-index: 1002;
+  pointer-events: none;
 }
+.submenu {
+  background-color: var(--color-navbar-tertiary);
+}
+.submenu .nav-item,
 .submenu .navbar-item {
   display: block;
-  padding: 0.45rem 1rem;
+  padding: 0.3rem 1rem;
 }
-.submenu .navbar-item a {
+.submenu a {
   color: #ecf0f1;
   display: block;
 }
-/* Show submenu on hover for desktop */
-.has-submenu:hover > .submenu {
-  display: block;
-}
-
 
 /* Hamburger styles */
 #hamburger {
@@ -225,6 +227,28 @@ footer {
   margin-top: 2rem;
 }
 
+/* Only when the site isn't using mobile (max-width:800px) rules. */
+@media (min-width: 801px) {
+  .has-submenu > .submenu {
+    opacity: 0;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+    transform: translateY(10px) scaleY(0.98);
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 220ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 220ms cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 220ms;
+  }
+  .has-submenu:hover > .submenu,
+  .has-submenu.open > .submenu {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+    pointer-events: auto;
+    visibility: visible;
+    transition: opacity 220ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 220ms cubic-bezier(0.4, 0, 0.2, 1), visibility 0s;
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 800px) {
   body {
@@ -244,7 +268,7 @@ footer {
   }
 
   .hero h1 {
-    font-size: 2rem;
+    font-size: 4rem;
   }
 
   .hero p {
@@ -256,38 +280,110 @@ footer {
   }
 
   .navbar {
-    padding: 0.1rem 0;
+    padding: 0.5rem 0;
+  }
+
+  .nav-hidden {
+    display: inline;
   }
 
   .nav-menu {
     border-top: 4px double rgb(43, 124, 255);
     position: absolute;
-    background-color: var(--color-navbarSecondary);
+    background-color: var(--color-navbar-secondary);
     top: 100%;
     right: 0;
     left: 0;
     flex-direction: column;
     align-items: flex-start;
     width: 100vw;
-    padding: 0;
-    box-shadow: 0 8px 16px #0002;
-    display: none;
-    gap: 1rem;
-    text-align: center;
+    box-shadow: 0 18px 16px rgba(0, 0, 0, 0.347);
+    /* collapse by default and animate open */
+    max-height: 0;
+    overflow: hidden;
+    gap: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: max-height 300ms ease, opacity 220ms ease, transform 220ms ease;
+  }
+  .nav-menu.active {
+    max-height: 80vh; /* large enough for menu content */
+    opacity: 1;
+    transform: translateY(0);
+    display: flex;
   }
 
-  .nav-menu.active {
-    display: flex;
+  /* Solid navbar when mobile menu is open */
+  .navbar.menu-open {
+    background-color: var(--color-navbar-secondary);
+    transition: background-color 220ms ease;
   }
 
   .nav-item {
     width: 100%;
     margin: 0.5rem 0;
   }
-  .nav-link {
-    font-size: 1.3em;
+
+  .nav-link,
+  .submenu-toggle {
+    padding: 0.5rem 3rem;
     width: 100%;
     display: block;
-    padding: 0.7em 0;
+    text-align: left;
+    background: transparent;
+    border: 0;
+  }
+
+  .nav-link {
+    font-size: 1.4em;
+  }
+
+  .submenu .nav-link {
+    font-size: 1.2em;
+  }
+
+  .submenu .nav-link {
+    padding: 0 4rem; /* adjust right/left as needed for spacing */
+  }
+
+  .has-submenu {
+    position: relative;
+  }
+
+  /* Mobile: make submenu a vertical indented list when opened (animated) */
+  .has-submenu .submenu {
+    opacity: 0;
+    position: static;
+    width: 100vw;
+    left: 0;
+    right: 0;
+    max-height: 0;
+    overflow: hidden;
+    box-shadow: none;
+    background-color: var(--color-navbar-tertiary);
+    transition: max-height 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Mobile: open on click which adds .open class, not hover */
+  .has-submenu.open > .submenu {
+    opacity: 1;
+    visibility: visible;
+    max-height: 800px; /* ample space for expansion */
+    transition: max-height 260ms ease, opacity 200ms ease;
+    pointer-events: auto;
+    transition: max-height 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .has-submenu.open > .submenu-toggle {
+    padding-bottom: 0.5em; /* Adjust value as needed */
+  }
+
+  .has-submenu .fa-caret-down {
+    transition: transform 180ms ease;
+  }
+  .has-submenu.open .fa-caret-down {
+    transform: rotate(180deg);
   }
 }
