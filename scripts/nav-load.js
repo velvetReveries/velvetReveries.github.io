@@ -115,6 +115,35 @@ document.addEventListener("DOMContentLoaded", function () {
           closeAll();
         }
       });
+
+      // Mobile scroll: hide navbar on scroll down, show on scroll up
+      let lastScrollY = window.scrollY;
+      let ticking = false;
+      function handleMobileNavbarScroll() {
+        if (window.matchMedia("(max-width: 800px)").matches && navbarEl) {
+          const currentScrollY = window.scrollY;
+          if (currentScrollY > lastScrollY && currentScrollY > 40) {
+            navbarEl.classList.add("navbar--hidden");
+          } else {
+            navbarEl.classList.remove("navbar--hidden");
+          }
+          lastScrollY = currentScrollY;
+        } else if (navbarEl) {
+          navbarEl.classList.remove("navbar--hidden");
+        }
+        ticking = false;
+      }
+      window.addEventListener("scroll", function () {
+        if (!ticking) {
+          window.requestAnimationFrame(handleMobileNavbarScroll);
+          ticking = true;
+        }
+      });
+      window.addEventListener("resize", function () {
+        if (navbarEl && !window.matchMedia("(max-width: 800px)").matches) {
+          navbarEl.classList.remove("navbar--hidden");
+        }
+      });
     })
     .catch((error) => {
       // Step 6: log any error during loading
